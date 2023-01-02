@@ -11,9 +11,9 @@ import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useState } from 'react'
-import { addMovie } from '../../redux/actions/action';
+import { addMovie, editMovie } from '../../redux/actions/action';
 
 function Copyright(props) {
     return (
@@ -33,16 +33,17 @@ const theme = createTheme();
 export default function Edit() {
     const obj=useParams()
     console.log(obj);
+    const oldMovie=useSelector(state=>state.movies.find(el=>el.id==obj.idEdit))
     const navigate = useNavigate()
-    const [title, setTitle] = useState("")
-    const [rating, setRating] = useState(0)
-    const [imgUrl, setImgUrl] = useState("")
-    const [desc, setDesc] = useState("")
+    const [title, setTitle] = useState(oldMovie.title)
+    const [rating, setRating] = useState(oldMovie.rating)
+    const [imgUrl, setImgUrl] = useState(oldMovie.posterUrl)
+    const [desc, setDesc] = useState(oldMovie.description)
     const dispatch = useDispatch()
     const handelSubmit = (e) => {
         e.preventDefault()
         if (title) {
-            dispatch(addMovie(title, desc, imgUrl, rating))
+            dispatch(editMovie(oldMovie.id,title, desc,+rating, imgUrl ))
             navigate("/")
         }
         else {
@@ -77,6 +78,7 @@ export default function Edit() {
                                     fullWidth
                                     id="Title"
                                     label="Title"
+                                    value={title}
                                     autoFocus
                                     onChange={(e) => setTitle(e.target.value)}
                                 />
@@ -90,6 +92,7 @@ export default function Edit() {
                                     name="rating"
                                     type='number'
                                     autoComplete="family-name"
+                                    value={rating}
                                     onChange={(e) => setRating(e.target.value)}
                                 />
                             </Grid>
@@ -101,6 +104,7 @@ export default function Edit() {
                                     label="imgUrl"
                                     type="url"
                                     id="imgUrl"
+                                    value={imgUrl}
                                     onChange={(e) => setImgUrl(e.target.value)}
                                 />
                             </Grid>
@@ -113,6 +117,7 @@ export default function Edit() {
                                     name="Description"
                                     multiline
                                     maxRows={4}
+                                    value={desc}
                                     onChange={(e) => setDesc(e.target.value)}
                                 />
                             </Grid>

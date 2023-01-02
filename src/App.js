@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Add from './components/Add/Add';
 import Edit from './components/Edit/Edit';
 
+
 function App() {
   
 
@@ -15,7 +16,7 @@ function App() {
     <Route path='/addMovie' element={<Add/>}/>
     <Route path='/editMovie/:idEdit' element={<Edit/>}/>
    </Routes>
-      
+   
   </>
   );
 }

@@ -29,7 +29,7 @@ export default function MovieCard({el}) {
       </CardContent>
       <CardActions>
         <Button size="small" onClick={()=>dispatch(deleteMovie(el.id))}>Delete</Button>
-        <Link to={`/editMovie`}>  <Button size="small">Edit</Button></Link>
+        <Link to={`/editMovie/${el.id}`}>  <Button size="small">Edit</Button></Link>
        <Link to={`/details/${el.id}`}> <Button size="small">Learn More</Button></Link>
       </CardActions>
     </Card>
