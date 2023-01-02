@@ -4,7 +4,7 @@ import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import Link from '@mui/material/Link';
-import { Link as LinkR, useNavigate } from 'react-router-dom'
+import { Link as LinkR, useNavigate, useParams } from 'react-router-dom'
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies';
@@ -30,7 +30,9 @@ function Copyright(props) {
 
 const theme = createTheme();
 
-export default function Add() {
+export default function Edit() {
+    const obj=useParams()
+    console.log(obj);
     const navigate = useNavigate()
     const [title, setTitle] = useState("")
     const [rating, setRating] = useState(0)
@@ -63,7 +65,7 @@ export default function Add() {
                         <LocalMoviesIcon />
                     </Avatar>
                     <Typography component="h1" variant="h5">
-                        Add movie
+                        Edit movie
                     </Typography>
                     <Box component="form" noValidate sx={{ mt: 3 }}>
                         <Grid container spacing={2}>
